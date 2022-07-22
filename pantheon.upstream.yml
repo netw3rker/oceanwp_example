@@ -23,3 +23,28 @@ protected_web_paths:
 # 'protected_web_paths_override' is set to true, then the upstream paths
 # are disabled.
 protected_web_paths_override: false
+
+workflows:
+  deploy_product:
+    after:
+      - type: webphp
+        description: install wordpress with oceanwp maria example setup
+        script: private/scripts/oceanwp/demo/install_ocean.php
+      - type: webphp
+        description: Import Maria Example Data
+        script: private/scripts/oceanwp/demo/import_ocean_data.php
+      - type: webphp
+        description: Import Maria Example Data
+        script: private/scripts/oceanwp/demo/import_ocean_data.php
+      - type: webphp
+        description: Import Maria theme settings
+        script: private/scripts/oceanwp/demo/import_ocean_theme_settings.php
+      - type: webphp
+        description: Import Maria theme widgets
+        script: private/scripts/oceanwp/demo/import_ocean_theme_widgets.php
+      - type: webphp
+        description: Import Maria theme forms
+        script: private/scripts/oceanwp/demo/import_ocean_theme_forms.php
+      - type: webphp
+        description: Post-import cleanup
+        script: private/scripts/oceanwp/demo/import_ocean_cleanup.php
